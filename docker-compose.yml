@@ -1,0 +1,18 @@
+version: '3.7' # 파일 규격 버전
+
+services: # 이 항목 밑에 실행하려는 컨테이너 들을 정의 ( 컴포즈에서 컨테이너 : 서비스 )
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - '80:80'
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    restart: 'always'
+  app:
+    image: chaewonkong/apil:latest ## 추가됨
+    container_name: apil-backoffice-backend
+    expose:
+      - '3000'
+    volumes:
+      - ./.env:/app/.env
