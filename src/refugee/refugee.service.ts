@@ -46,7 +46,7 @@ export class RefugeeService {
     console.log(form, refugee);
   }
 
-  findAllWithBasicInfo() {
+  findAll() {
     return this.refugeeRepository
       .createQueryBuilder('refugee')
       .leftJoinAndSelect('refugee.attorneyInCharge', 'attorney')

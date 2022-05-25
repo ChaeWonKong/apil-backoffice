@@ -31,7 +31,7 @@ export class RefugeeController {
   @Get()
   findAllWithBasicInfo() {
     console.log('refugee');
-    return this.refugeeService.findAllWithBasicInfo();
+    return this.refugeeService.findAll();
   }
 
   @Get(':id')
