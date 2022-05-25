@@ -113,7 +113,7 @@ export class Form {
     description: '사건번호가 적혀 있는 1심 법원 서류 제출',
   })
   @Column()
-  firstCourtDocumentUrl: string;
+  courtDocumentUrl: string;
 
   @ApiProperty({
     description: '1심 법원 판결문',
@@ -126,12 +126,6 @@ export class Form {
   })
   @Column()
   secondCourtJudgementUrl: string;
-
-  @ApiProperty({
-    description: '사건번호가 적혀 있는 2심 법원 서류 제출',
-  })
-  @Column()
-  secondCourtDocumentUrl: string;
 
   @ApiProperty({
     description: '최종심 법원 판결문',
@@ -178,5 +172,5 @@ export class Form {
     description: '개인정보 제공 동의',
   })
   @Column()
-  pravacyConsent: boolean;
+  privacyConsent: boolean;
 }

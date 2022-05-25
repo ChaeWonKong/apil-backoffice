@@ -10,7 +10,10 @@ import {
 import { RefugeeService } from './refugee.service';
 import { CreateRefugeeDto } from './dto/create-refugee.dto';
 import { UpdateRefugeeDto } from './dto/update-refugee.dto';
+import { FormResultDto } from './dto/result.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('refugee')
 @Controller('refugee')
 export class RefugeeController {
   constructor(private readonly refugeeService: RefugeeService) {}
@@ -21,14 +24,14 @@ export class RefugeeController {
   }
 
   @Post('form')
-  submitForm(@Body() body) {
-    console.log(body);
+  submitForm(@Body() body: FormResultDto) {
+    this.refugeeService.submitForm(body);
   }
 
   @Get()
-  findAll() {
+  findAllWithBasicInfo() {
     console.log('refugee');
-    return this.refugeeService.findAll();
+    return this.refugeeService.findAllWithBasicInfo();
   }
 
   @Get(':id')

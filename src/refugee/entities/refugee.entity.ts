@@ -18,7 +18,7 @@ import { Form } from './form.entity';
 
 @Entity()
 export class Refugee {
-  @ApiProperty({ description: '' })
+  @ApiProperty({ description: '아이디' })
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: string;
 
@@ -46,7 +46,7 @@ export class Refugee {
   @Column()
   arrivalDate: Date;
 
-  @ApiProperty({ description: '체류형태' })
+  @ApiProperty({ description: '체류형태', enum: VisitType })
   @Column()
   visitType: VisitType;
 
@@ -74,11 +74,11 @@ export class Refugee {
   @Column()
   koreanName: string;
 
-  @ApiProperty({ description: '난민신청단계' })
+  @ApiProperty({ description: '난민신청단계', enum: RefugeeClaimStage })
   @Column()
   claimStage: RefugeeClaimStage;
 
-  @ApiProperty({ description: '진행상황' })
+  @ApiProperty({ description: '진행상황', enum: Status })
   @Column()
   status: Status;
 
@@ -102,7 +102,7 @@ export class Refugee {
   @DeleteDateColumn()
   deletedAt: Date;
 
-  @ApiProperty({ description: '인테이크 폼 응답 정보' })
+  @ApiProperty({ description: '인테이크 폼 응답 정보', type: () => Form })
   @OneToOne(() => Form, (form) => form.refugee)
   form: Form;
 }
