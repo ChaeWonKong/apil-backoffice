@@ -6,6 +6,7 @@ import { ConfigModule } from '@nestjs/config';
 import { RefugeeModule } from './refugee/refugee.module';
 import { AttorneyModule } from './attorney/attorney.module';
 import { DetensionModule } from './detension/detension.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { DetensionModule } from './detension/detension.module';
     RefugeeModule,
     AttorneyModule,
     DetensionModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
