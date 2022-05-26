@@ -30,13 +30,12 @@ export class RefugeeController {
 
   @Get()
   findAllWithBasicInfo() {
-    console.log('refugee');
     return this.refugeeService.findAll();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.refugeeService.findOne(+id);
+    return this.refugeeService.findOneBasicInfo(id);
   }
 
   @Patch(':id')

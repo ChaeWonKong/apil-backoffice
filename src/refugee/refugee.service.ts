@@ -53,8 +53,11 @@ export class RefugeeService {
       .getMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} refugee`;
+  findOneBasicInfo(id: string) {
+    return this.refugeeRepository
+      .createQueryBuilder()
+      .where('id = :id', { id })
+      .getOne();
   }
 
   update(id: number, updateRefugeeDto: UpdateRefugeeDto) {

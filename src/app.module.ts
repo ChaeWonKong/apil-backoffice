@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { RefugeeModule } from './refugee/refugee.module';
 import { AttorneyModule } from './attorney/attorney.module';
+import { DetensionModule } from './detension/detension.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { AttorneyModule } from './attorney/attorney.module';
     TypeOrmModule.forRoot({ autoLoadEntities: true }),
     RefugeeModule,
     AttorneyModule,
+    DetensionModule,
   ],
   controllers: [AppController],
   providers: [AppService],
