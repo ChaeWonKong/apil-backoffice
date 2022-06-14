@@ -12,9 +12,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    MongooseModule.forRoot(
-      'mongodb+srv://root:djvlf6^@apil.nighu.mongodb.net/apil?retryWrites=true&w=majority',
-    ),
+    MongooseModule.forRoot(process.env.MONGO_DB_URL),
     RefugeeModule,
     AttorneyModule,
     DetensionModule,
