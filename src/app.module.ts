@@ -8,10 +8,13 @@ import { AttorneyModule } from './attorney/attorney.module';
 import { DetensionModule } from './detension/detension.module';
 import { UserModule } from './user/user.module';
 
+import { MongooseModule } from '@nestjs/mongoose';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    // TypeOrmModule.forRoot({ autoLoadEntities: true }),
+    MongooseModule.forRoot(
+      'mongodb+srv://root:djvlf6^@apil.nighu.mongodb.net/apil?retryWrites=true&w=majority',
+    ),
     RefugeeModule,
     AttorneyModule,
     DetensionModule,

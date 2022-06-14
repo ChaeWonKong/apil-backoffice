@@ -1,32 +1,26 @@
-import { Inject, Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
+import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { FormResponseType } from 'src/common/form-response-type';
-import { AXIOS_INSTANCE_TOKEN } from 'src/common/http/http.constants';
 import { HttpService } from 'src/common/http/http.service';
 import { MongoApiService } from 'src/common/mongo-api/mongo-api.service';
-import { Repository } from 'typeorm';
-import { CreateRefugeeDto } from './dto/create-refugee.dto';
 import { FormResultDto } from './dto/result.dto';
-import { UpdateRefugeeDto } from './dto/update-refugee.dto';
 import { Form } from './entities/form.entity';
-import { Refugee } from './entities/refugee.entity';
+// import { Refugee } from './entities/refugee.entity';
+import { RefugeeDocument, Refugee } from './schemas/refugee.schema';
 
 @Injectable()
 export class RefugeeService {
   constructor(
+    @InjectModel(Refugee.name)
+    private refugeeModel: Model<RefugeeDocument>,
+
     private readonly httpService: HttpService,
     private readonly mongoApiService: MongoApiService, // private readonly refugeeRepository: Repository<Refugee>, // @InjectRepository(Refugee) // @InjectRepository(Form) // private readonly formRepository: Repository<Form>,
   ) {}
 
-  async create(body: any) {
-    const { data } = await this.mongoApiService.insertOne(body);
-    return data;
-    // return this.refugeeRepository
-    //   .createQueryBuilder()
-    //   .insert()
-    //   .into(Refugee)
-    //   .values(createRefugeeDto)
-    //   .execute();
+  create(body: any) {
+    return this.refugeeModel.insertMany([body]);
   }
 
   // TODO: Mongo로 저장해야 함
@@ -51,29 +45,22 @@ export class RefugeeService {
   }
 
   async findAll() {
-    const { data } = await this.mongoApiService.findMany({ Surname: '' });
-    return data;
+    return this.refugeeModel.find().select(['-form']).exec();
   }
 
-  async findOne(id: string) {
-    const { data } = await this.mongoApiService.findOne(id);
-    return data;
-  }
-
-  findOneBasicInfo(id: string) {
-    // return this.refugeeRepository
-    //   .createQueryBuilder()
-    //   .where('id = :id', { id })
-    //   .getOne();
+  findOne(id: string) {
+    return this.refugeeModel.findById(id).exec();
+    // const { data } = await this.mongoApiService.findOne(id);
+    // return data;
   }
 
   async update(id: string, body: any) {
-    const { data } = await this.mongoApiService.updateOne(id, body);
-    return data;
+    return this.refugeeModel.updateOne({ _id: id }, body);
+    // const { data } = await this.mongoApiService.updateOne(id, body);
+    // return data;
   }
 
   async remove(id: string) {
-    const { data } = await this.mongoApiService.deleteOne(id);
-    return data;
+    return this.refugeeModel.findByIdAndDelete(id);
   }
 }
