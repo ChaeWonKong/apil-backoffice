@@ -19,8 +19,8 @@ export class RefugeeController {
   constructor(private readonly refugeeService: RefugeeService) {}
 
   @Post()
-  create(@Body() createRefugeeDto: CreateRefugeeDto) {
-    return this.refugeeService.create(createRefugeeDto);
+  create(@Body() body: any) {
+    return this.refugeeService.create(body);
   }
 
   @Post('form')
@@ -29,22 +29,22 @@ export class RefugeeController {
   }
 
   @Get()
-  findAllWithBasicInfo() {
+  findAll() {
     return this.refugeeService.findAll();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.refugeeService.findOneBasicInfo(id);
+    return this.refugeeService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateRefugeeDto: UpdateRefugeeDto) {
-    return this.refugeeService.update(+id, updateRefugeeDto);
+  update(@Param('id') id: string, @Body() body) {
+    return this.refugeeService.update(id, body);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.refugeeService.remove(+id);
+    return this.refugeeService.remove(id);
   }
 }

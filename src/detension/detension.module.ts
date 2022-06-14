@@ -5,7 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Detension } from './entities/detension.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Detension])],
+  // imports: [TypeOrmModule.forFeature([Detension])],
   controllers: [DetensionController],
   providers: [DetensionService],
 })

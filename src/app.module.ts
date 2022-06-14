@@ -11,7 +11,7 @@ import { UserModule } from './user/user.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    TypeOrmModule.forRoot({ autoLoadEntities: true }),
+    // TypeOrmModule.forRoot({ autoLoadEntities: true }),
     RefugeeModule,
     AttorneyModule,
     DetensionModule,

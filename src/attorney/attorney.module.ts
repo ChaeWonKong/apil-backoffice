@@ -4,6 +4,6 @@ import { AttorneyController } from './attorney.controller';
 
 @Module({
   controllers: [AttorneyController],
-  providers: [AttorneyService]
+  providers: [AttorneyService],
 })
 export class AttorneyModule {}

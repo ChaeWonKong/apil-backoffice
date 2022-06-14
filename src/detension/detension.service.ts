@@ -7,10 +7,9 @@ import { Detension } from './entities/detension.entity';
 
 @Injectable()
 export class DetensionService {
-  constructor(
-    @InjectRepository(Detension)
-    private readonly detensionRepository: Repository<Detension>,
-  ) {}
+  constructor() // @InjectRepository(Detension)
+  // private readonly detensionRepository: Repository<Detension>,
+  {}
   create(createDetensionDto: CreateDetensionDto) {
     return 'This action adds a new detension';
   }
@@ -20,11 +19,11 @@ export class DetensionService {
   }
 
   findOneByRefugeeId(refugeeId: string) {
-    return this.detensionRepository
-      .createQueryBuilder('detension')
-      .leftJoin('detension.refugee', 'refugee')
-      .where('refugee.id = :refugeeId', { refugeeId })
-      .getOne();
+    // return this.detensionRepository
+    //   .createQueryBuilder('detension')
+    //   .leftJoin('detension.refugee', 'refugee')
+    //   .where('refugee.id = :refugeeId', { refugeeId })
+    //   .getOne();
   }
 
   update(id: number, updateDetensionDto: UpdateDetensionDto) {

@@ -4,9 +4,11 @@ import { RefugeeController } from './refugee.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Refugee } from './entities/refugee.entity';
 import { Form } from './entities/form.entity';
+import { MongoApiModule } from 'src/common/mongo-api/mongo-api.module';
+import { HttpModule } from 'src/common/http/http.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Refugee, Form])],
+  imports: [HttpModule, MongoApiModule],
   controllers: [RefugeeController],
   providers: [RefugeeService],
 })
