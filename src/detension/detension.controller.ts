@@ -7,10 +7,12 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { DetensionService } from './detension.service';
 import { CreateDetensionDto } from './dto/create-detension.dto';
 import { UpdateDetensionDto } from './dto/update-detension.dto';
 
+@ApiTags('Detension')
 @Controller('detension')
 export class DetensionController {
   constructor(private readonly detensionService: DetensionService) {}

@@ -9,6 +9,7 @@ import { DetensionModule } from './detension/detension.module';
 import { UserModule } from './user/user.module';
 
 import { MongooseModule } from '@nestjs/mongoose';
+import { CommentModule } from './comment/comment.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -17,6 +18,7 @@ import { MongooseModule } from '@nestjs/mongoose';
     AttorneyModule,
     DetensionModule,
     UserModule,
+    CommentModule,
   ],
   controllers: [AppController],
   providers: [AppService],

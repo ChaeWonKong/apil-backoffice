@@ -12,7 +12,7 @@ import { AttorneyService } from './attorney.service';
 import { CreateAttorneyDto } from './dto/create-attorney.dto';
 import { UpdateAttorneyDto } from './dto/update-attorney.dto';
 
-@ApiTags('attorney')
+@ApiTags('Attorney')
 @Controller('attorney')
 export class AttorneyController {
   constructor(private readonly attorneyService: AttorneyService) {}
