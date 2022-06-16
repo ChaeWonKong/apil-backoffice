@@ -9,7 +9,7 @@ import { Attorney } from 'src/attorney/entities/attorney.entity';
 
 export type RefugeeDocument = Refugee & Document;
 
-class Form {
+export class Form {
   question: string;
   answer: string | boolean | number;
 }

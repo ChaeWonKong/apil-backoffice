@@ -6,7 +6,7 @@ import { AllExceptionsFilter } from './common/exception-filters/all-exception.fi
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const origin = ['http://localhost:3000'];
+  const origin = ['http://localhost:3000', 'https://apil-web.vercel.app/'];
   app.enableCors({ origin });
 
   // Global Validation Pipe
