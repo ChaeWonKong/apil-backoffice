@@ -3,6 +3,11 @@ import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 import { AllExceptionsFilter } from './common/exception-filters/all-exception.filter';
+import { applicationDefault, initializeApp } from 'firebase-admin/app';
+import { credential } from 'firebase-admin';
+
+//
+const serviceAccount = require('../apil-backoffice-33c2463dc988.json');
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -11,6 +16,11 @@ async function bootstrap() {
 
   // Global Validation Pipe
   app.useGlobalPipes(new ValidationPipe());
+
+  initializeApp({
+    credential: credential.cert(serviceAccount),
+    // credential: applicationDefault(),
+  });
 
   // Global Exception Filter
   const httpAdapter = app.get(HttpAdapterHost);
