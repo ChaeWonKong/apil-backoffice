@@ -1,7 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { AuthDto } from './dto/auth.dto';
 // import { getAuth } from 'firebase-admin/auth';
-import admin from 'firebase-admin';
 import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from './schemas/user.schema';
 import { Model } from 'mongoose';
@@ -27,7 +26,21 @@ export class UserService {
 
       const user = insertRes.pop();
 
-      return this.signInUserByUid(user.uid);
+      return user;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  async findUserByEmail(email: string) {
+    let user: User & { _id: any };
+
+    try {
+      user = await this.userModel.findOne({ email }).exec();
+      if (!user) {
+        throw new HttpException('User not found', HttpStatus.UNAUTHORIZED);
+      }
+      return user;
     } catch (e) {
       throw e;
     }
@@ -65,12 +78,6 @@ export class UserService {
     const additionalClaims = {
       role: user.role,
     };
-
-    try {
-      token = await admin.auth().createCustomToken(uid, additionalClaims);
-    } catch (e) {
-      throw e;
-    }
 
     // return new token
     return { token };

@@ -10,6 +10,7 @@ import { UserModule } from './user/user.module';
 
 import { MongooseModule } from '@nestjs/mongoose';
 import { CommentModule } from './comment/comment.module';
+import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -19,6 +20,7 @@ import { CommentModule } from './comment/comment.module';
     DetensionModule,
     UserModule,
     CommentModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
