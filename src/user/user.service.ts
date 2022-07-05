@@ -32,6 +32,20 @@ export class UserService {
     }
   }
 
+  async findUserByUid(uid: string) {
+    let user: User & { _id: any };
+
+    try {
+      user = await this.userModel.findOne({ uid }).exec();
+      if (!user) {
+        throw new HttpException('User not found', HttpStatus.UNAUTHORIZED);
+      }
+      return user;
+    } catch (e) {
+      throw e;
+    }
+  }
+
   async findUserByEmail(email: string) {
     let user: User & { _id: any };
 

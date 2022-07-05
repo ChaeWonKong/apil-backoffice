@@ -11,6 +11,9 @@ import { UserModule } from './user/user.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { CommentModule } from './comment/comment.module';
 import { AuthModule } from './auth/auth.module';
+import { APP_GUARD } from '@nestjs/core';
+import { RolesGuard } from './common/guards/roles.guard';
+import { JwtStrategy } from './auth/strategies/jwt.strategy';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),

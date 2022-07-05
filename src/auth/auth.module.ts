@@ -6,10 +6,12 @@ import { PassportModule } from '@nestjs/passport';
 import { GoogleStrategy } from './strategies/google.strategy';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './constants/secret';
+import { UserModule } from 'src/user/user.module';
+import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Module({
   imports: [
-    UserService,
+    UserModule,
     PassportModule,
     JwtModule.register({
       secret: jwtConstants.secret,
@@ -17,6 +19,6 @@ import { jwtConstants } from './constants/secret';
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, GoogleStrategy],
+  providers: [AuthService, GoogleStrategy, JwtStrategy],
 })
 export class AuthModule {}

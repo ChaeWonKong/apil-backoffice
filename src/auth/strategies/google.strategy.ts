@@ -4,6 +4,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { UserService } from 'src/user/user.service';
 import { UserType } from 'src/user/enums/user-type.enum';
 import { Role } from 'src/user/enums/role.enum';
+import { GoogleProfile } from '../interfaces/google-profile.interface';
 
 @Injectable()
 export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
@@ -20,21 +21,22 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
   async validate(
     accessToken: string,
     refreshToken: string,
-    profile: any,
+    profile: GoogleProfile,
     done: VerifyCallback,
   ): Promise<any> {
-    const { name, emails } = profile;
+    const { emails, displayName, photos, id } = profile;
 
     //TODO: return token
     try {
       const user = await this.userService.findUserByEmail(emails[0].value);
       done(null, user);
     } catch (e) {
+      // if not user
       const userCreateRes = await this.userService.createUser({
-        name: '',
+        name: displayName,
         email: emails[0].value,
         role: Role.UNAUTHORIZED,
-        uid: '',
+        uid: id,
       });
       done(null, userCreateRes);
     }

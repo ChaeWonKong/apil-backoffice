@@ -1,8 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { User } from 'src/user/schemas/user.schema';
 import { UserService } from 'src/user/user.service';
 import { CreateAuthDto } from './dto/create-auth.dto';
 import { UpdateAuthDto } from './dto/update-auth.dto';
+import { jwtConstants } from './constants/secret';
 
 @Injectable()
 export class AuthService {
@@ -14,7 +16,7 @@ export class AuthService {
   async validateUser(token: string) {}
 
   // TODO: refactor
-  googleLogin(req) {
+  async googleLogin(req: { user: User }) {
     if (!req.user) {
       return 'No user from google';
     }
@@ -22,8 +24,8 @@ export class AuthService {
     const { user } = req;
 
     const payload = {
-      username: user.username,
-      sub: user.userId,
+      sub: user.uid,
+      role: user.role,
     };
 
     return {
