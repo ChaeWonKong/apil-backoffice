@@ -12,9 +12,9 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  @Roles(Role.ADMIN)
-  @UseGuards(RolesGuard)
-  @UseGuards(AuthGuard('jwt'))
+  // @Roles(Role.ADMIN)
+  // @UseGuards(RolesGuard)
+  // @UseGuards(AuthGuard('jwt'))
   getHello(@Req() req): string {
     return this.appService.getHello();
   }

@@ -17,6 +17,7 @@ async function bootstrap() {
   app.useGlobalFilters(new AllExceptionsFilter(httpAdapter));
 
   const config = new DocumentBuilder()
+    .addBearerAuth()
     .setTitle('Oh Good Project Server API')
     .setDescription('Oh Good Project API 명세서')
     .setVersion('Dev_1.0')
