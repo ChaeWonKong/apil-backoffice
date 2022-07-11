@@ -24,7 +24,7 @@ export class CreateUserDto {
   @ApiProperty({ description: '사용자 분류' })
   type?: UserType | string;
 
-  @ApiProperty({ description: '사용자 권한' })
+  @ApiProperty({ description: '사용자 권한', enum: Role })
   @IsEnum(Role)
   role: Role;
 }

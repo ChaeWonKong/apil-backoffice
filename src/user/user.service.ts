@@ -5,6 +5,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from './schemas/user.schema';
 import { Model } from 'mongoose';
 import { CreateUserDto } from './dto/create-user.dto';
+import { Role } from './enums/role.enum';
 
 @Injectable()
 export class UserService {
@@ -29,6 +30,17 @@ export class UserService {
       return user;
     } catch (e) {
       throw e;
+    }
+  }
+
+  async findAllUser() {
+    try {
+      return this.userModel.find();
+    } catch (e) {
+      throw new HttpException(
+        e.message || 'Unexpected server Error',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
     }
   }
 
@@ -95,5 +107,16 @@ export class UserService {
 
     // return new token
     return { token };
+  }
+
+  async updateUserRole(uid: string, role: Role) {
+    try {
+      return this.userModel.findOneAndUpdate({ uid }, { role });
+    } catch (e) {
+      throw new HttpException(
+        'Unexpected error',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
 }
