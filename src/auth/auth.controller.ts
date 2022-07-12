@@ -8,10 +8,12 @@ import {
   Delete,
   UseGuards,
   Req,
+  Query,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
+import { GoogleCallbackDto } from './dto/google-callback-dto';
 
 @Controller('auth')
 @ApiTags('Auth')

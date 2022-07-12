@@ -6,6 +6,7 @@ import { User, UserDocument } from './schemas/user.schema';
 import { Model } from 'mongoose';
 import { CreateUserDto } from './dto/create-user.dto';
 import { Role } from './enums/role.enum';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UserService {
@@ -109,9 +110,9 @@ export class UserService {
     return { token };
   }
 
-  async updateUserRole(uid: string, role: Role) {
+  async updateUser(uid: string, updateDto: UpdateUserDto) {
     try {
-      return this.userModel.findOneAndUpdate({ uid }, { role });
+      return this.userModel.findOneAndUpdate({ uid }, updateDto);
     } catch (e) {
       throw new HttpException(
         'Unexpected error',

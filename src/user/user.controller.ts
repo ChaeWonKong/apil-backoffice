@@ -15,7 +15,7 @@ import { Roles } from 'src/common/decorators/roles.decorator';
 import { RolesGuard } from 'src/common/guards/roles.guard';
 import { AuthDto } from './dto/auth.dto';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserRoleDto } from './dto/update-user-role.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 import { Role } from './enums/role.enum';
 import { UserService } from './user.service';
 
@@ -45,15 +45,34 @@ export class UserController {
   }
 
   @ApiBearerAuth()
+  @Get(':uid')
+  @UseGuards(AuthGuard('jwt'))
+  findOne(@Param('uid') uid: string) {
+    return this.userService.findUserByUid(uid);
+  }
+
+  @ApiBearerAuth()
+  @Patch(':uid')
+  @UseGuards(RolesGuard)
+  @UseGuards(AuthGuard('jwt'))
+  updateUser(
+    @Param('uid') uid: string,
+    @Body()
+    updateUserDto: UpdateUserDto,
+  ) {
+    return this.userService.updateUser(uid, updateUserDto);
+  }
+
+  @ApiBearerAuth()
   @Patch(':uid/role')
   @Roles(Role.ADMIN)
   @UseGuards(RolesGuard)
   @UseGuards(AuthGuard('jwt'))
-  editUserRole(
+  updateUserRole(
     @Param('uid') uid: string,
     @Body()
-    updateUserRoleDto: UpdateUserRoleDto,
+    updateUserDto: UpdateUserDto,
   ) {
-    return this.userService.updateUserRole(uid, updateUserRoleDto.role);
+    return this.userService.updateUser(uid, updateUserDto);
   }
 }
