@@ -54,6 +54,6 @@ export class DetentionService {
   }
 
   remove(refugeeId: string) {
-    return `This action removes a #${refugeeId} detention`;
+    return this.detentionModel.findOneAndRemove({ refugee: refugeeId });
   }
 }
