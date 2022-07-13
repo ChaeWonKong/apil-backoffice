@@ -17,5 +17,6 @@ import { Refugee, RefugeeSchema } from './schemas/refugee.schema';
   ],
   controllers: [RefugeeController],
   providers: [RefugeeService],
+  exports: [RefugeeService],
 })
 export class RefugeeModule {}

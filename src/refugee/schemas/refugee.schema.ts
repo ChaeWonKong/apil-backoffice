@@ -4,7 +4,7 @@ import { Status } from 'src/common/status.enum';
 import { VisitType } from 'src/common/visit-type.enum';
 import { Gender } from 'src/common/gender.enum';
 import { RefugeeClaimStage } from 'src/common/refugee-claim-stage.enum';
-import { Attorney } from 'src/attorney/entities/attorney.entity';
+import { User } from 'src/user/schemas/user.schema';
 // import { Form } from 'src/refugee/schemas/form.schema';
 
 export type RefugeeDocument = Refugee & Document;
@@ -61,8 +61,8 @@ export class Refugee {
   @Prop()
   status: Status;
 
-  @Prop()
-  attorneyInCharge: Attorney;
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
+  attorney: User;
 
   @Prop()
   initialContactDate: Date;

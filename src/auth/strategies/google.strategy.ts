@@ -5,6 +5,7 @@ import { UserService } from 'src/user/user.service';
 import { UserType } from 'src/user/enums/user-type.enum';
 import { Role } from 'src/user/enums/role.enum';
 import { GoogleProfile } from '../interfaces/google-profile.interface';
+import { Job } from 'src/user/enums/job.enum';
 
 @Injectable()
 export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
@@ -37,6 +38,7 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
         email: emails[0].value,
         role: Role.UNAUTHORIZED,
         uid: id,
+        job: Job.GENERAL,
       });
       done(null, userCreateRes);
     }

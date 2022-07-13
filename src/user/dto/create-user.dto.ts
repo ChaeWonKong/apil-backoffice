@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEnum, IsOptional, IsString } from 'class-validator';
+import { Job } from '../enums/job.enum';
 import { Role } from '../enums/role.enum';
 import { UserType } from '../enums/user-type.enum';
 
@@ -27,4 +28,8 @@ export class CreateUserDto {
   @ApiProperty({ description: '사용자 권한', enum: Role })
   @IsEnum(Role)
   role: Role;
+
+  @ApiProperty({ description: '사용자 권한', enum: Job })
+  @IsEnum(Job)
+  job: Job;
 }
