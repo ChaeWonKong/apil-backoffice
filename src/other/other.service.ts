@@ -14,11 +14,11 @@ export class OtherService {
 
   async create(refugeeId: string, createDto: CreateOtherDto) {
     try {
-      const others = await this.otherModel.find({ refugee: refugeeId });
-      if (others.length) {
-        throw new HttpException(
-          'Detention already exist',
-          HttpStatus.BAD_REQUEST,
+      const other = await this.otherModel.findOne({ refugee: refugeeId });
+      if (other) {
+        return this.otherModel.findOneAndUpdate(
+          { refugee: refugeeId },
+          createDto,
         );
       }
 

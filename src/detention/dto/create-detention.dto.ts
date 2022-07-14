@@ -17,8 +17,4 @@ export class CreateDetentionDto {
   @ApiProperty({ description: '관련소송' })
   @IsString()
   relatedCase: string;
-
-  @ApiProperty({ description: '난민 ID' })
-  @IsString()
-  refugeeId: string;
 }

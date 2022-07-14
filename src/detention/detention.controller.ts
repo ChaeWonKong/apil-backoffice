@@ -17,9 +17,12 @@ import { UpdateDetentionDto } from './dto/update-detention.dto';
 export class DetenTionController {
   constructor(private readonly detentionService: DetentionService) {}
 
-  @Post()
-  create(@Body() createDetentionDto: CreateDetentionDto) {
-    return this.detentionService.create(createDetentionDto);
+  @Post(':refugeeId')
+  create(
+    @Param('refugeeId') refugeeId: string,
+    @Body() createDetentionDto: CreateDetentionDto,
+  ) {
+    return this.detentionService.create(refugeeId, createDetentionDto);
   }
 
   // @Get()

@@ -22,7 +22,10 @@ export class RefugeeManageController {
     @Param('refugeeId') refugeeId: string,
     @Body() createRefugeeManageDto: CreateRefugeeManageDto,
   ) {
-    return this.refugeeManageService.create(refugeeId, createRefugeeManageDto);
+    return this.refugeeManageService.createOrUpdate(
+      refugeeId,
+      createRefugeeManageDto,
+    );
   }
 
   @Get(':refugeeId')

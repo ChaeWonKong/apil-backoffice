@@ -16,19 +16,15 @@ export class DetentionService {
     private detentionModel: Model<DetentionDocument>,
     private refugeeService: RefugeeService,
   ) {}
-  async create({ refugeeId, ...rest }: CreateDetentionDto) {
+
+  async create(refugee: string, createDto: CreateDetentionDto) {
     try {
-      const detentions = await this.detentionModel.find({ refugee: refugeeId });
+      const detentions = await this.detentionModel.find({ refugee });
       if (detentions.length) {
-        throw new HttpException(
-          'Detention already exist',
-          HttpStatus.BAD_REQUEST,
-        );
+        return this.detentionModel.findOneAndUpdate({ refugee }, createDto);
       }
 
-      const refugee = await this.refugeeService.findOne(refugeeId);
-
-      return this.detentionModel.insertMany([{ ...rest, refugee }]);
+      return this.detentionModel.insertMany([{ refugee, createDto }]);
     } catch (e) {
       console.log(e);
     }
@@ -39,7 +35,7 @@ export class DetentionService {
   }
 
   findOneByRefugeeId(refugeeId: string) {
-    return this.detentionModel.findById(refugeeId);
+    return this.detentionModel.findOne({ refugee: refugeeId });
   }
 
   async update(refugeeId: string, updateDetentionDto: UpdateDetentionDto) {

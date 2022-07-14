@@ -15,7 +15,20 @@ export class RefugeeManageService {
     private refugeeManageModel: Model<RefugeeManageDocument>,
   ) {}
 
-  create(refugee: string, createRefugeeManageDto: CreateRefugeeManageDto) {
+  async createOrUpdate(
+    refugee: string,
+    createRefugeeManageDto: CreateRefugeeManageDto,
+  ) {
+    const refugeeManage = await this.refugeeManageModel
+      .findOne({ refugee })
+      .exec();
+    if (refugeeManage) {
+      return this.refugeeManageModel.findOneAndUpdate(
+        { refugee },
+        createRefugeeManageDto,
+      );
+    }
+
     return this.refugeeManageModel.insertMany([
       { ...createRefugeeManageDto, refugee },
     ]);
