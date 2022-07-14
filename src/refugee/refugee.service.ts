@@ -4,6 +4,7 @@ import { Model } from 'mongoose';
 import { FormResponseType } from 'src/common/form-response-type';
 import { HttpService } from 'src/common/http/http.service';
 import { MongoApiService } from 'src/common/mongo-api/mongo-api.service';
+import { FilterRefugeeDto } from './dto/filter-refugee.dto';
 import { FormResultDto } from './dto/result.dto';
 import { Form } from './entities/form.entity';
 // import { Refugee } from './entities/refugee.entity';
@@ -44,8 +45,8 @@ export class RefugeeService {
     console.log(form, refugee);
   }
 
-  async findAll() {
-    return this.refugeeModel.find().select(['-form']).exec();
+  async findAll(filterDto?: FilterRefugeeDto) {
+    return this.refugeeModel.find(filterDto).select(['-form']).exec();
   }
 
   findOne(id: string) {

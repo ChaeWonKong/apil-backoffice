@@ -16,7 +16,7 @@ export class RefugeeManage {
   rejectedDate: Date;
 
   @Prop()
-  reason: Reason;
+  reason: Reason | string;
 
   @Prop()
   // 이의신청일

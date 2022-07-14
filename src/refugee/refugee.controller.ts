@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { RefugeeService } from './refugee.service';
 import { CreateRefugeeDto } from './dto/create-refugee.dto';
@@ -17,6 +18,7 @@ import { Roles } from 'src/common/decorators/roles.decorator';
 import { RolesGuard } from 'src/common/guards/roles.guard';
 import { AuthGuard } from '@nestjs/passport';
 import { Role } from 'src/user/enums/role.enum';
+import { FilterRefugeeDto } from './dto/filter-refugee.dto';
 
 @ApiBearerAuth()
 @ApiTags('refugee')
@@ -44,8 +46,8 @@ export class RefugeeController {
   @Roles(Role.ADMIN, Role.READ_AND_WRITE, Role.READ_ONLY)
   @UseGuards(RolesGuard)
   @UseGuards(AuthGuard('jwt'))
-  findAll() {
-    return this.refugeeService.findAll();
+  findAll(@Query() filterDto: FilterRefugeeDto) {
+    return this.refugeeService.findAll(filterDto);
   }
 
   @Get(':id')

@@ -7,6 +7,7 @@ import { Status } from 'src/common/status.enum';
 import { VisitType } from 'src/common/visit-type.enum';
 import { Form } from '../schemas/form.schema';
 import { Refugee } from '../entities/refugee.entity';
+import { User } from 'src/user/schemas/user.schema';
 
 export class CreateRefugeeDto extends Refugee {
   @ApiProperty({ description: '' })
@@ -69,9 +70,9 @@ export class CreateRefugeeDto extends Refugee {
   @IsString()
   status: Status;
 
-  @ApiProperty({ description: '' })
+  @ApiProperty({ description: '변호사' })
   @IsString()
-  attorneyInCharge: Attorney;
+  attorney: User;
 
   @ApiProperty({ description: '' })
   @IsString()
