@@ -14,6 +14,8 @@ import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from './common/guards/roles.guard';
 import { JwtStrategy } from './auth/strategies/jwt.strategy';
+import { OtherModule } from './other/other.module';
+import { RefugeeManageModule } from './refugee-manage/refugee-manage.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -24,6 +26,8 @@ import { JwtStrategy } from './auth/strategies/jwt.strategy';
     UserModule,
     CommentModule,
     AuthModule,
+    OtherModule,
+    RefugeeManageModule,
   ],
   controllers: [AppController],
   providers: [AppService],

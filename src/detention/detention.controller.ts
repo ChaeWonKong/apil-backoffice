@@ -12,7 +12,7 @@ import { DetentionService } from './detention.service';
 import { CreateDetentionDto } from './dto/create-detention.dto';
 import { UpdateDetentionDto } from './dto/update-detention.dto';
 
-@ApiTags('DetenTion')
+@ApiTags('Detention')
 @Controller('detention')
 export class DetenTionController {
   constructor(private readonly detentionService: DetentionService) {}
