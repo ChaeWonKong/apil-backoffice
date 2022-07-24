@@ -11,7 +11,7 @@ services: # 이 항목 밑에 실행하려는 컨테이너 들을 정의 ( 컴�
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
       - ./var/www:/var/www
-      - /etc/archive/office-api.apil.or.kr:/etc/letsencrypt/live/office-api.apil.or.kr
+      - /etc/letsencrypt/archive/office-api.apil.or.kr:/etc/letsencrypt/live/office-api.apil.or.kr
     restart: 'always'
   app:
     image: chaewonkong/apil:latest ## 추가됨
