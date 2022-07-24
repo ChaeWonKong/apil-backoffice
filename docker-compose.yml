@@ -4,7 +4,7 @@ services: # 이 항목 밑에 실행하려는 컨테이너 들을 정의 ( 컴�
   nginx:
     image: nginx:latest
     user: root
-    container_name: docker-compose exec service_name sh
+    container_name: nginx
     ports:
       - '80:80'
       - '443:443'
